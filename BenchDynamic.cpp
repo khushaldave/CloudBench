@@ -36,12 +36,12 @@ std::ofstream ofs,olog;
     long N;
     int Num_Of_Threads;
     long long Num_Of_Op;
-    long double gflopsCount;
+    long double mflopsCount=0.0;
     MatrixXd X = MatrixXd::Random( N, N);
     MatrixXd Y = MatrixXd::Random( N, N);
     std::vector<std::thread> threads;
     string ResultFileName;
-    double totalTime=0.0;
+    long double totalTime=0.0;
 
 double diffclock(clock_t clock1,clock_t clock2);
 void CalculateResult(int,int);
@@ -56,9 +56,9 @@ int main( int argc, char *argv[] )
     
     long N = atoi( argv[1] );
     int Num_Of_Threads = atoi( argv[2] );
-    Num_Of_Op=N*N*N;
+    Num_Of_Op=(long long)N*N*N;
     ResultFileName=argv[3];
-    cout<<ResultFileName;
+    //cout<<ResultFileName;
     X = MatrixXd::Random( N, N);
     Y = MatrixXd::Random( N, N);
     olog.open ("LogsA1.txt", std::ofstream::out | std::ofstream::app);
@@ -92,8 +92,10 @@ int main( int argc, char *argv[] )
     end = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsed =end-start;
     olog<< "Elapsed time: " << elapsed.count()<<endl;
-    ofs<<N<<","<<totalTime<<endl;
+   // ofs<<N<<","<<totalTime<<endl;
+    ofs<<N<<","<<mflopsCount<<endl;
     ofs.close();
+    //CalculatePerformance
     olog<<endl<<'\t'<< "Performance tests have been executed Successfully."<< endl;
     olog<<endl<<'\t'<< "Please find the results in Result_6_Thread.txt file in the Current Folder"<<'\n'<<'\n';
     return 0;
@@ -119,11 +121,11 @@ void CalculateResult(int thread_id,int order)
    // ofs<< endl<<"Thread "<< " is executing at priority "
     //         << sch.sched_priority << '\n';
    // ofs << "Elapsed time: " << elapsed.count()<<endl;
-   // gflopsCount+=(2*Num_Of_Op)/(elapsed.count());
-    totalTime+=elapsed.count();
+   mflopsCount+=((2*(Num_Of_Op/1000))/(long double)(elapsed.count()));
+    //totalTime=elapsed.count();
   //   ofs<< order<<","<<thread_id<<",";
  //   ofs << elapsed.count()<<totalTime<<endl;
-//<<","<<gflopsCount<<endl;
+//<<","<<mflopsCount<<endl;
     mtx.unlock();
 
 }
