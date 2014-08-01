@@ -1,3 +1,4 @@
+#!/bin/bash
 clear
 echo "Hello $USER Welcome to the Benchmarking Project"
 echo "Today is ";date
@@ -23,7 +24,7 @@ numThreads0="1";
 numThreads1="2";
 numThreads2="4";
 numThreads3="8";
-NOW=$(date +"%F");
+NOW=$(date +"%F_%T");
 g++ -Ofast -msse2 -std=c++0x BenchDynamic.cpp -o BenchDynamic -pthread  
 
 for i in 1 2 3 4 5 6 7
