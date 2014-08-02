@@ -9,23 +9,14 @@ echo "Enter the Largest Matrix  Size";
 read Mlast;
 echo "Enter the Step Size";
 read Ssize;
-#echo "Enter the Number of Threads";
-#read numThreads;
-#echo "Enter the Total number of readings that needs to be taken";
-#read numReadings;
-#for i in `seq 2 $numReadings`
-#do
-#    echo "$i"
-#echo "Enter the Number of threads for $i ";
-#read numThreads[i-1];
-#echo $numThreads[i-1];
-#done
 numThreads0="1";
 numThreads1="2";
 numThreads2="4";
 numThreads3="8";
 NOW=$(date +"%F_%T");
 g++ -Ofast -msse2 -std=c++0x BenchDynamic.cpp -o BenchDynamic -pthread  
+
+dstat -t -a --noheaders --output performancestat.csv &
 
 for i in 1 2 3 4 5 6 7
   do
@@ -61,6 +52,7 @@ for i in 1 2 3 4 5 6 7
  		Mstart=$(($Mstart + $Ssize));
 	done
   done
+pkill dstat
 echo "Benchmarking has been completed.";
 echo "Please find the results in Results.csv file in Current folder."
 exit 0
