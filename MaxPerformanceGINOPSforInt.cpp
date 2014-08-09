@@ -36,9 +36,9 @@ std::ofstream ofs,olog;
     long N;
     int Num_Of_Threads;
     long long Num_Of_Op;
-    long double mflopsCount=0.0;
-    MatrixXd X = MatrixXd::Random( N, N);
-    MatrixXd Y = MatrixXd::Random( N, N);
+    long double mInopsCount=0.0;
+    MatrixXi X = MatrixXi::Random( N, N);
+    MatrixXi Y = MatrixXi::Random( N, N);
     std::vector<std::thread> threads;
     string ResultFileName;
     long double totalTime=0.0;
@@ -57,8 +57,8 @@ int main( int argc, char *argv[] )
     long N = atoi( argv[1] );
     Num_Of_Op=(long long)N*N*N;
     ResultFileName=argv[2];
-    X = MatrixXd::Random( N, N);
-    Y = MatrixXd::Random( N, N);
+    X = MatrixXi::Random( N, N);
+    Y = MatrixXi::Random( N, N);
     olog.open ("LogsA1.txt", std::ofstream::out | std::ofstream::app);
     ofs.open (ResultFileName, std::ofstream::out | std::ofstream::app);
      if(ofs==NULL||olog==NULL)
@@ -88,39 +88,27 @@ int main( int argc, char *argv[] )
     std::chrono::duration<double> elapsed =end-start;
     olog<< "Elapsed time: " << elapsed.count()<<endl;
     ofs.precision(10);
-    ofs<<mflopsCount<<endl;
+    ofs<<mInopsCount<<endl;
     ofs.close();
     //CalculatePerformance
     olog<<endl<<'\t'<< "Performance tests have been executed Successfully."<< endl;
-    olog<<endl<<'\t'<< "Please find the results in Result_6_Thread.txt file in the Current Folder"<<'\n'<<'\n';
+    olog<<endl<<'\t'<< "Please find the results in Console in the Current exection shell"<<'\n'<<'\n';
     return 0;
 }
 
 void CalculateResult(int thread_id,int order)
-{std::this_thread::get_id();
-
-
-    MatrixXd R;
-   // std::cout<<"Current Thread Number is : "<<thread_id<<" System Thread Id is :"<<std::this_thread::get_id()<<std::endl;
+{
+    std::this_thread::get_id();
+    MatrixXi R;
     std::chrono::time_point<std::chrono::system_clock> tstart,tend;
     tstart = std::chrono::system_clock::now();
 
-     R.noalias() = X * Y ;
+    R.noalias() = X * Y ;
     tend = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsed = tend-tstart;
     mtx.lock();
-  //  sched_param sch;
-   // int policy;
-  //  pthread_getschedparam(pthread_self(), &policy,&sch);
-    std::lock_guard<std::mutex> lk(iomutex);
-   // ofs<< endl<<"Thread "<< " is executing at priority "
-    //         << sch.sched_priority << '\n';
-   // ofs << "Elapsed time: " << elapsed.count()<<endl;
-   mflopsCount+=((2*(Num_Of_Op/1000000))/(long double)(elapsed.count()));
-    //totalTime=elapsed.count();
-  //   ofs<< order<<","<<thread_id<<",";
- //   ofs << elapsed.count()<<totalTime<<endl;
-//<<","<<mflopsCount<<endl;
+   // std::lock_guard<std::mutex> lk(iomutex);
+    mInopsCount+=((2*(Num_Of_Op/1000000))/(long double)(elapsed.count()));
     mtx.unlock();
 
 }
