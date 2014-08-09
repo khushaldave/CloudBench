@@ -8127,3 +8127,35 @@ Elapsed time: 2.20475
 2.20475
 Elapsed time: 2.19328
 2.19328
+0 concurrent threads are supported.
+
+ ******************************** Measuring performance at 2014-08-09.16:11:40  ****************************
+
+Number of Independent Cores in this System are : 4
+0 concurrent threads are supported.
+
+ ******************************** Measuring performance at 2014-08-09.16:22:17  ****************************
+
+Number of Independent Cores in this System are : 4
+Elapsed time: 161.022
+
+	Performance tests have been executed Successfully.
+
+	Please find the results in Result_6_Thread.txt file in the Current Folder
+
+0 concurrent threads are supported.
+
+ ******************************** Measuring performance at 2014-08-09.16:24:59  ****************************
+
+Number of Independent Cores in this System are : 4
+Elapsed time: 150.255
+
+	Performance tests have been executed Successfully.
+
+	Please find the results in Result_6_Thread.txt file in the Current Folder
+
+0 concurrent threads are supported.
+
+ ******************************** Measuring performance at 2014-08-09.16:27:30  ****************************
+
+Number of Independent Cores in this System are : 4

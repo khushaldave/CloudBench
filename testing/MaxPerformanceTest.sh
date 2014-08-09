@@ -28,7 +28,7 @@ for i in 1 2 3 4 5 6 7
 #pkill dstat
 printf "\tMaximum maintained FLOPS for Matrix Multiplication Benchmark with DOUBLE data type is GFLOPS :\t"
 awk '$0>x{x=$0};END{print x}' ${ResultFile}
-rm ${ResultFile}
+#rm ${ResultFile}
 printf "\n\tNow performing the Benchmark with FLOAT data values : \n"
 
 sudo g++ -Ofast -msse2 -std=c++0x MaxPerformanceGFLOPSforFloat.cpp -o MaxperF -pthread  
@@ -46,7 +46,7 @@ for i in 1 2 3 4 5 6 7
 #pkill dstat
 printf "\n\tMaximum maintained FLOPS for Matrix Multiplication with FLOAT Benchmark is : "
 awk '$0>x{x=$0};END{print x}' ${ResultFile}
-rm ${ResultFile}
+#rm ${ResultFile}
 printf "\n\tNow performing the Benchmark with INTEGER data values : \n"
 
 sudo g++ -Ofast -msse2 -std=c++0x MaxPerformanceGINOPSforInt.cpp -o MaxperI -pthread  
@@ -64,7 +64,7 @@ for i in 1 2 3 4 5 6 7
 #pkill dstat
 printf "\n\tMaximum maintained FLOPS for Matrix Multiplication with INTEGER Benchmark is : "
 awk '$0>x{x=$0};END{print x}' ${ResultFile}
-rm ${ResultFile}
+#rm ${ResultFile}
 NOW=$(date +"%F_%T");
 sudo g++ -Ofast -msse2 -std=c++0x testLuMultiThreadedDynamic.cpp -o eqnsolve -pthread
 
@@ -88,7 +88,7 @@ for i in 1 2 3 4 5 6 7
 printf "\n\tMaximum maintained FLOPS for Equation Solve Benchmark is : "
 awk '$0>x{x=$0};END{print x}' ${ResultFile}
 printf "FLOPS"
-rm ${ResultFile}
+#rm ${ResultFile}
 NOW=$(date +"%F_%T");
 sudo g++ -Ofast -msse2 -std=c++0x testLuBasic.cpp -o eqnsolveThread 
 
@@ -106,7 +106,7 @@ for i in 1 2 3 4 5 6 7
 printf "\tMaximum maintained FLOPS for Equation Solve Benchmark is : "
 awk '$0>x{x=$0};END{print x}' ${ResultFile}
 printf "FLOPS"
-rm ${ResultFile}
+#rm ${ResultFile}
 printf "\n\n\tBenchmarking has been completed.";
 #printf "\n\tPlease find the results in Results.csv file in Current folder."
 exit 0
